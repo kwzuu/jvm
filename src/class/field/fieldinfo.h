@@ -1,14 +1,16 @@
+#pragma once
 //
 // Created by lexi on 2022-07-27.
 //
+#include <vector>
+#include "../attribute/attributeinfo.h"
+#include "../../types.h"
 
-#ifndef JVM_FIELDINFO_H
-#define JVM_FIELDINFO_H
-
-
-class FieldInfo {
-
+struct FieldInfo
+{
+    u2 access_flags;
+    u2 name_index;
+    u2 descriptor_index;
+    u2 attributes_count;
+    std::vector<AttributeInfo> attributes;
 };
-
-
-#endif //JVM_FIELDINFO_H

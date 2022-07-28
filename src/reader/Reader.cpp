@@ -8,7 +8,7 @@
 ClassReader::ClassReader(char *path) {
     file = fopen(path, "r");
     if (!file) {
-        halt_and_catch_fire("class does not exist", 1);
+        halt_and_catch_fire(1, "class does not exist");
     }
 }
 
@@ -16,32 +16,30 @@ ClassReader::ClassReader(char *path) {
 
 
 Class ClassReader::load() {
-    nimpl();
-
     //! beginning
-    u4 magic = read<u4>();
-    u2 major_ver = read<u2>();
-    u2 minor_ver = read<u2>();
+    u4 magic = read_u4();
+    u2 major_ver = read_u2();
+    u2 minor_ver = read_u2();
 
     //! constant pool
-    u2 cpinfo_count = read<u2>();
+    u2 cpinfo_count = read_u2();
     std::vector<CpInfo> constant_pool(cpinfo_count - 1);
     for(int i = 0; i < (cpinfo_count - 1); i++) {
         constant_pool[i] = read_cpinfo();
     }
 
     //! misc data (not important)
-    u2 access_flags = read<u2>();
-    u2 this_class = read<u2>();
-    u2 super_class = read<u2>();
+    u2 access_flags = read_u2();
+    u2 this_class = read_u2();
+    u2 super_class = read_u2();
     
     //! interfaces
-    u2 interfaces_count = read<u2>();
+    u2 interfaces_count = read_u2();
     vector<u2> interfaces(interfaces_count); // FIXMEEEE: what
     
     
     //! fields
-    u2 fields_count = read<u2>();
+    u2 fields_count = read_u2();
     std::vector<FieldInfo> fields;
     fields.reserve(fields_count);
     for(int i = 0; i < fields_count; i++) {
@@ -50,7 +48,7 @@ Class ClassReader::load() {
         
     
     //! methods
-    u2 methods_count = read<u2>();
+    u2 methods_count = read_u2();
     std::vector<MethodInfo> method_infos;
     method_infos.reserve(methods_count);
     for (int i = 0; i < methods_count; i++) {
@@ -58,7 +56,7 @@ Class ClassReader::load() {
     }
 
     //! attributes
-    u2 attributes_count = read<u2>();
+    u2 attributes_count = read_u2();
     std::vector<AttributeInfo> attribute_infos;
     attribute_infos.reserve(attributes_count);
     for (int i = 0; i < attributes_count; i++) {

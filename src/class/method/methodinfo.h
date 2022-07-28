@@ -1,14 +1,14 @@
+#pragma once
+#include "../../types.h"
+#include "../attribute/attributeinfo.h"
 //
 // Created by lexi on 2022-07-27.
 //
 
-#ifndef JVM_METHODINFO_H
-#define JVM_METHODINFO_H
-
-
-class MethodInfo {
-
+struct MethodInfo {
+    u2                         access_flags;
+    u2                         name_index;
+    u2                         descriptor_index;
+    u2                         attributes_count;
+    std::vector<AttributeInfo> attributes;
 };
-
-
-#endif //JVM_METHODINFO_H

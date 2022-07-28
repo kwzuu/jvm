@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/lexi/CLionProjects/jvm'
+g++ -Wall -Wextra -Wpedantic -Wshadow -Werror -std=c++23 -o "./jvm" ./src/reader/Reader.cpp ./src/reader/input.cpp ./src/reader/infos/cpinfo.cpp ./src/reader/infos/fieldinfo.cpp ./src/reader/infos/methodinfo.cpp ./src/reader/infos/attributeinfo.cpp ./src/lib/lib.cpp ./src/main.cpp ./src/class/Class.cpp ./src/class/attribute/attributeinfo.cpp ./src/class/constant_pool/cpinfo.cpp ./src/class/field/fieldinfo.cpp ./src/class/method/instr/instr.cpp ./src/class/method/methodinfo.cpp
+make: Leaving directory '/home/lexi/CLionProjects/jvm'
+ 

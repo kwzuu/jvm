@@ -1,17 +1,14 @@
+#pragma once
 //
 // created by aenri someday
 //
 
-
-
-#ifndef JVM_INSTR_H
-#define JVM_INSTR_H
 #include <cstddef>
 #include <vector>
 
 #include "../../constant_pool/cpinfo.h"
 
-#define byte std::byte
+using std::byte
 
 typedef void* InstructionCallable(void*, void*, std::vector<CpInfo>);
 
@@ -1458,6 +1455,3 @@ typedef union instruction {
         //stackpush undefined
     };
 } instruction;
-
-
-#endif // JVM_INSTR_H

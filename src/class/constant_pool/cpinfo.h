@@ -1,9 +1,7 @@
+#pragma once
 //
 // Created by lexi on 2022-07-27.
 //
-
-#ifndef JVM_CPINFO_H
-#define JVM_CPINFO_H
 
 #include <cstdint>
 #include "../../constants.h"
@@ -112,5 +110,3 @@ union CpInfo {
 
     CpInfo();
 };
-
-#endif //JVM_CPINFO_H

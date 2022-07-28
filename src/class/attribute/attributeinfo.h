@@ -1,14 +1,11 @@
+#pragma once
 //
 // Created by lexi on 2022-07-27.
 //
-
-#ifndef JVM_ATTRIBUTEINFO_H
-#define JVM_ATTRIBUTEINFO_H
-
-
-class AttributeInfo {
-
+#include <vector>
+#include "../../types.h"
+struct AttributeInfo {
+    u2 attribute_name_index;
+    u4 attribute_length;
+    std::vector<u1> info;
 };
-
-
-#endif //JVM_ATTRIBUTEINFO_H

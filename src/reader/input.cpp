@@ -2,25 +2,24 @@
 
 long ClassReader::tell() { return ftell(file); }
 
-template<class T>
-T ClassReader::read() {
-    char buf[sizeof(T)];
-    fread(buf, sizeof(T), 1, file);
-    return *reinterpret_cast<T *>(buf); // hot girl (lexi) shit right here
+u1 ClassReader::read_u1() {
+    char buf[1];
+    fread(buf, sizeof(u1), 1, file);
+    return *reinterpret_cast<u1 *>(buf); // hot girl (lexi) shit right here
 }
 
-template<class T>
-T ClassReader::read_inplace() {
-    long pos = tell();
-    auto x = read<T>();
-    seek(pos, SEEK_SET);
-    return x;
+u2 ClassReader::read_u2() {
+    return read_u1() << 8 | read_u1();
 }
 
-std::string ClassReader::read_n(long n) {
+u4 ClassReader::read_u4() {
+    return read_u2() << 16 | read_u2();
+}
+
+u1 *ClassReader::read_n(long n) {
     char *s = static_cast<char *>(calloc(sizeof(char), n));
     fread(s, n, 1, file);
-    return s;
+    return reinterpret_cast<u1 *>(s);
 }
 
 void ClassReader::seek(long offset, int whence) {
