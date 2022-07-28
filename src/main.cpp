@@ -3,18 +3,10 @@
 #include <cstdlib>
 #include <cstring>
 #include "./class/method/instr/instr.h"
-//#define TEST
+// #include "fmt.h"
+#include "vm/vm.h"
 
-char *add_null_term(size_t len, u1 *s) {
-    auto ret = new char[len + 1];
-    ret[len] = '\0';
-    memcpy(ret, s, len);
-    return ret;
-}
-
-char *fmt(JUtf8 s) {
-    return add_null_term(s.length, s.data);
-}
+void vm_open(ClassReader main_class); 
 
 #ifdef TEST
 int main(int argc, char **argv) {
@@ -31,24 +23,58 @@ int main(int argc, char **argv) {
     main_class.seek(0, SEEK_SET);
 }
 #else
+
+using std::cout;
+
 int main(int argc, char **argv) {
     if (argc < 1) {
         fprintf(stderr, "specify main class");
         return 1;
     }
     ClassReader main_class(argv[1]);
-    auto cls = main_class.load();
-    
-    auto this_class = cls.constant_pool[cls.this_class - 1];
-    auto this_name = cls.constant_pool[this_class.j_class.name_index - 1].j_utf8;
 
-    auto super_class = cls.constant_pool[cls.super_class - 1];
-    auto super_name = cls.constant_pool[super_class.j_class.name_index - 1].j_utf8;
-
-    printf("magic: %08x\n", cls.magic);
-    printf("minor: %04x\n", cls.minor);
-    printf("major: %04x\n", cls.major);
-    printf("this_class: #%d (%s)\n", cls.this_class, fmt(this_name));
-    printf("super_class: #%d (%s)\n", cls.super_class, fmt(super_name));
+    cout << fmt(main_class) << std::endl;
+    //vm_open(main_class);
 }
 #endif
+
+// void cpinfo_parse_test(ClassReader main_class) {
+//     auto cls = main_class.load();
+    
+//     auto this_class = cls.constant_pool[cls.this_class - 1];
+//     auto this_name = cls.constant_pool[this_class.j_class.name_index - 1];
+
+//     auto super_class = cls.constant_pool[cls.super_class - 1];
+//     auto super_name = cls.constant_pool[super_class.j_class.name_index - 1];
+
+//     printf("magic: 0x%08x\n", cls.magic);
+//     printf("minor: 0x%04x\n", cls.minor);
+//     printf("major: 0x%04x\n", cls.major);
+//     printf("constant pool {\n");
+    
+//     int i = 0;
+//     for (CpInfo c : cls.constant_pool) {
+//         i++;
+//         cout << fmt(c) << '\n';
+//     }
+
+//     printf("}\n");
+//     printf("this_class: #%d (%s)\n",
+//            cls.this_class, &fmt(this_name)[0]);
+//     printf("super_class: #%d (%s)\n",
+//            cls.super_class, &fmt(super_name)[0]);
+// }
+
+void vm_open(ClassReader main_class) {
+    auto vm = VM();
+    auto cls = main_class.load();
+    vm.loadClass(cls);
+    auto classpath = const_cast<char *>("Main");
+    auto method = const_cast<char *>("main");
+    auto nfo = vm.getMethod(classpath, method);
+    printf(
+        "Name of main method: %s\n",
+        cls.method_name(&nfo)
+    );
+
+}

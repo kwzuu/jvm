@@ -1,4 +1,7 @@
 #pragma once
+
+#include "../class/constant_pool/cpinfo.h"
+
 #define halt_and_catch_fire(code, ...) {\
     fprintf(stderr, __VA_ARGS__);\
     exit(code);\
@@ -8,3 +11,5 @@
 
 // side_effect :: IO ()
 // #define side_effect() {fprintf(stderr, "scala user detected\n"); execl("bash", "-c", "cope_scala_user(){cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user&};cope_scala_user")}
+
+char* parse_jutf8(JUtf8 jutf);
