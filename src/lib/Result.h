@@ -11,22 +11,27 @@ namespace result {
     public:
         template<class T, class E>
         static Either<T, E> Ok(T val) {
-
+            return Result<T, E>(false, );
         }
 
+        bool is_ok(); // { return !_is_err; }
+        bool is_err(); // { return _is_err; }
+
         T unwrap() {
+            if (!is_err) return ok;
+            fprintf(stderr, "PANIC because STUPID PROGRAMMER\n");
 
         }
 
     private:
-        bool is_err;
+        bool _is_err;
 
         union {
             T ok;
             E err;
         };
 
-        Result(bool is_err, );
+        Result(bool is_err, union { T t; E e; });
     };
     template<L, R>
 }
