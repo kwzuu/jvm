@@ -8,38 +8,7 @@
 #include "../fmt.h"
 using std::vector;
 
-void VM::loadClass(Class clazz)
-{
-    classes.push_back(clazz);
-}
-Class VM::getClass(char *classpath)
-{
-    for (long unsigned int i = 0; i < classes.size(); i++)
-    {
-        if (strcmp(classes[i].name(), classpath) == 0)
-        {
-            return classes[i];
-        }
-    }
-    fprintf(stderr, "Class %s not found\n", classpath);
-    exit(1);
-}
-MethodInfo VM::getMethod(char *classpath, char *methodname)
-{
-    Class clazz = getClass(classpath);
-    for (auto m : clazz.methods) {
-        auto method_name = clazz.method_name(&m);
 
-        printf("Method name found as %s\n", method_name);
-
-
-        if (strcmp(method_name, methodname) == 0) {
-            return m;
-        }
-    }
-    fprintf(stderr, "Method %s not found in Class %s\n", methodname, classpath);
-    exit(1);
-}
 
 void VM::displayAllCpInfo(char *classpath) {
     Class clazz = getClass(classpath);
@@ -50,10 +19,23 @@ void VM::displayAllCpInfo(char *classpath) {
     }
 }
 
-VM::VM() {
-
+VM::VM(int argc. char **argv) {
+    // Load classes
+    for (int i = 1; i < argc; i++) {
+        loadClass(getClass(argv[i]));
+    }
 }
 
 VM::~VM() {
+
+}
+
+bool VM::verifyValidBytecodeVersion(uint32_t version) {
+    u2 major = (version >> 16) & 0xFFFF;
+    u2 minor = (version >> 8) & 0xFF;
+    if (!major <= 55) {
+        fprintf(stderr, "Bytecode version %d.%d is not supported\n", major, minor);
+        exit(1);
+    }
 
 }

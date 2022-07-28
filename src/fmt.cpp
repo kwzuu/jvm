@@ -100,6 +100,11 @@ string fmt(JInvokeDynamic id) {
         id.name_and_type_index, id.bootstrap_method_attr_index);
 }
 
+std::string fmt(AttributeInfo nfo) {
+    return format("AttributeInfo { name_idx: #%d, length: %d }",
+                  nfo.attribute_name_index, nfo.attribute_length);
+}
+
 string fmt(CpInfo cpi) {
     switch (cpi.any.tag) {
         case 7:

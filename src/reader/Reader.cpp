@@ -12,7 +12,13 @@ ClassReader::ClassReader(char *path) {
     }
 }
 
-
+u4 ClassReader::readBytecodeVersion() {
+    u4 magic = readU4();
+    if (magic != 0xCAFEBABE) {
+        halt_and_catch_fire(1, "not a valid class file (bad magic number: %x)", magic);
+    }
+    return readU2() << 16 | readU2();
+}
 
 
 Class ClassReader::load() {
@@ -40,8 +46,7 @@ Class ClassReader::load() {
     
     //! fields
     u2 fields_count = read_u2();
-    std::vector<FieldInfo> fields;
-    fields.reserve(fields_count);
+    std::vector<FieldInfo> fields(fields_count);
     for(int i = 0; i < fields_count; i++) {
         fields[i] = read_fieldinfo();
     }
@@ -49,16 +54,14 @@ Class ClassReader::load() {
     
     //! methods
     u2 methods_count = read_u2();
-    std::vector<MethodInfo> method_infos;
-    method_infos.reserve(methods_count);
+    std::vector<MethodInfo> method_infos(methods_count);
     for (int i = 0; i < methods_count; i++) {
         method_infos[i] = read_methodinfo();
     }
 
     //! attributes
     u2 attributes_count = read_u2();
-    std::vector<AttributeInfo> attribute_infos;
-    attribute_infos.reserve(attributes_count);
+    std::vector<AttributeInfo> attribute_infos(attributes_count);
     for (int i = 0; i < attributes_count; i++) {
         attribute_infos[i] = read_attributeinfo();
     }

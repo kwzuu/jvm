@@ -1,7 +1,8 @@
 #include "../Reader.h"
 #include "../../lib/lib.h"
 #include <vector>
-
+#include "../../flags.h"
+#include "../../fmt.h"
 MethodInfo ClassReader::read_methodinfo() {
     
     u2 access_flags     = read_u2();
@@ -13,6 +14,7 @@ MethodInfo ClassReader::read_methodinfo() {
     for (int i = 0; i < attributes_count; i++) {
         attributes[i] = read_attributeinfo();
     }
+
     return MethodInfo (
         access_flags, 
         name_index, 
