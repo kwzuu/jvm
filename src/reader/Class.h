@@ -2,7 +2,6 @@
 #include "../field/fieldinfo.h"
 #include "../attribute/attributeinfo.h"
 #include <vector>
-
 struct Class {
     u4 magic;
     u2 minor;
@@ -19,8 +18,6 @@ struct Class {
     u2 attributes_count;
     std::vector<AttributeInfo> attributes;
 
-    bool shallow_verify() {
-        return magic == 0xCAFEBABE
-        && ;
-    }
+    bool shallow_verify();
+    int version_compare(Class *that);
 };

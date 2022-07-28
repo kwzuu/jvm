@@ -10,7 +10,7 @@
 #include <cstdio>
 #include <string>
 #include "../constant_pool/cpinfo.h"
-
+#include "./Class.h"
 class ClassReader {
 public:
     explicit ClassReader(char *path);
