@@ -6,10 +6,8 @@
 #define JVM_CPINFO_H
 
 #include <cstdint>
+#include "../constants.h"
 
-#define u1 uint8_t
-#define u2 uint16_t
-#define u4 uint32_t
 
 struct Any {
     u1 tag;

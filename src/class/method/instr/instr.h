@@ -9,7 +9,7 @@
 #include <cstddef>
 #include <vector>
 
-#include "../constant_pool/cpinfo.h"
+#include "../../constant_pool/cpinfo.h"
 
 #define byte std::byte
 
