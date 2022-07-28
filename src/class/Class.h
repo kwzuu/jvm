@@ -30,4 +30,6 @@ struct Class {
 
     bool shallow_verify();
     int version_compare(Class *that);
+    char* name();
+    char* method_name(MethodInfo *nfo);
 };
