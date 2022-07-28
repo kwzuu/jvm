@@ -1,7 +1,6 @@
 #include <iostream>
 #include "reader/Reader.h"
-#include "constant_pool/cpinfo.h"
-#include "instr/instr.h"
+
 #ifdef TEST
 int main() {
 

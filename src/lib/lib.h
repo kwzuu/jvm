@@ -3,4 +3,7 @@
     exit(code);\
 }
 
-int compareVersions(Class clazz1, Class clazz2);
+#define nimpl() halt_and_catch_fire("Called something that's not implemented\n", 63)
+
+// side_effect :: IO ()
+// #define side_effect() {fprintf(stderr, "scala user detected\n"); execl("bash", "-c", "cope_scala_user(){cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user&};cope_scala_user")}

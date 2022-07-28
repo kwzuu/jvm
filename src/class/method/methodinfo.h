@@ -6,7 +6,7 @@
 #define JVM_METHODINFO_H
 
 
-class methodinfo {
+class MethodInfo {
 
 };
 

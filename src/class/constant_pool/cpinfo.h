@@ -6,7 +6,7 @@
 #define JVM_CPINFO_H
 
 #include <cstdint>
-#include "../constants.h"
+#include "../../constants.h"
 
 
 struct Any {
