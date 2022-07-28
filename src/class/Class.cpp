@@ -1,5 +1,4 @@
 #include "./Class.h"
-// #include "../constants.h"
 
 bool Class::shallow_verify() {
     return magic == JAVA_MAGIC_NUMBER;

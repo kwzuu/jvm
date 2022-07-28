@@ -1,7 +1,5 @@
 #pragma once
-//
-// Created by lexi on 2022-07-27.
-//
+
 #include <vector>
 #include "../../types.h"
 struct AttributeInfo {

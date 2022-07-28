@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../constants.h"
 namespace access_flags {
     const u2 ACC_PUBLIC     = 0x0001;

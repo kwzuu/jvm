@@ -2,7 +2,7 @@
 #include "reader/Reader.h"
 #include <cstdlib>
 #include <cstring>
-
+#include "./class/method/instr/instr.h"
 //#define TEST
 
 char *add_null_term(size_t len, u1 *s) {
