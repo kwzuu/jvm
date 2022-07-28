@@ -22,6 +22,12 @@ u1 *ClassReader::read_n(long n) {
     return reinterpret_cast<u1 *>(s);
 }
 
+
 void ClassReader::seek(long offset, int whence) {
     fseek(file, offset, whence);
+}
+char* ClassReader::read_utf8(u2 length) {
+    char *s = static_cast<char *>(calloc(sizeof(char), length));
+    fread(s, length, 1, file);
+    return s;
 }

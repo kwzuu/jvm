@@ -79,8 +79,11 @@ string fmt(JNameAndType nt) {
 }
 
 string fmt(JUtf8 s) {
-    return format("Utf8", add_null_term(s.length, s.data));
+//    return format("Utf8 %s", add_null_term(s.length, s.data));
+    return format("Utf8 { length: %d, data: %s }",
+                  s.length, reinterpret_utf8p(&s));
 }
+
 
 string fmt(JMethodHandle mh) {
     return format("MethodHandle { reference: #%d, kind: %02x }",

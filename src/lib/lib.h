@@ -12,4 +12,4 @@
 // side_effect :: IO ()
 // #define side_effect() {fprintf(stderr, "scala user detected\n"); execl("bash", "-c", "cope_scala_user(){cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user|cope_scala_user&};cope_scala_user")}
 
-char* parse_jutf8(JUtf8 jutf);
+char* reinterpret_utf8p(JUtf8* ptr);

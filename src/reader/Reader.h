@@ -22,6 +22,8 @@ public:
     u4 read_u4();
     
     u1 *read_n(long n);
+    char* read_utf8(u2 length);
+
     CpInfo read_cpinfo();
     FieldInfo read_fieldinfo();
     AttributeInfo read_attributeinfo();

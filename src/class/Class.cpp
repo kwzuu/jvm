@@ -21,11 +21,11 @@ char* Class::name() {
             this_class - 1
             ].j_class.name_index - 1
         ].j_utf8;
-    return parse_jutf8(utf8_ptr);
+    return reinterpret_utf8p(&utf8_ptr);
 }
 char* Class::method_name(MethodInfo *nfo) {
     auto utf8_ptr = constant_pool [
         nfo->name_index -1
     ].j_utf8;
-    return parse_jutf8(utf8_ptr);
+    return reinterpret_utf8p(&utf8_ptr);
 }

@@ -5,9 +5,10 @@
 #include <cstdlib>
 #include <cstring>
 
-char* parse_jutf8(JUtf8 jutf) {
-    char* str = (char*)malloc(jutf.length + 1);
-    memcpy(str, jutf.data, jutf.length);
-    str[jutf.length] = '\0';
+char* reinterpret_utf8p(JUtf8* ptr) {
+    // reconstruct utf8 string from JUtf8
+    char* str = (char*)malloc(ptr->length + 1);
+    memcpy(str, ptr->data, ptr->length);
+    str[ptr->length] = '\0';
     return str;
 }

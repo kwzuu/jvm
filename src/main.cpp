@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "./class/method/instr/instr.h"
-// #include "fmt.h"
+#include "fmt.h"
 #include "vm/vm.h"
 
 void vm_open(ClassReader main_class); 
@@ -23,7 +23,6 @@ int main(int argc, char **argv) {
     main_class.seek(0, SEEK_SET);
 }
 #else
-
 using std::cout;
 
 int main(int argc, char **argv) {
@@ -33,8 +32,8 @@ int main(int argc, char **argv) {
     }
     ClassReader main_class(argv[1]);
 
-    cout << fmt(main_class) << std::endl;
-    //vm_open(main_class);
+//    cout << fmt(main_class) << std::endl;
+    vm_open(main_class);
 }
 #endif
 
@@ -70,11 +69,7 @@ void vm_open(ClassReader main_class) {
     auto cls = main_class.load();
     vm.loadClass(cls);
     auto classpath = const_cast<char *>("Main");
-    auto method = const_cast<char *>("main");
-    auto nfo = vm.getMethod(classpath, method);
-    printf(
-        "Name of main method: %s\n",
-        cls.method_name(&nfo)
-    );
+//    auto method = const_cast<char *>("main");
+    vm.displayAllCpInfo(classpath);
 
 }
